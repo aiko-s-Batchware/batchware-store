@@ -28,8 +28,8 @@ echo.
 echo What would you like to do?
 echo 0. Exit
 echo 1. Install Example
-echo 2. Install PC Info Tool
-echo 3. Install Another App
+echo 2. Install Example
+echo 3. Install Example
 set /p choice=Choose an option: 
 
 if "%choice%"=="0" (
