@@ -41,7 +41,7 @@ for /f "usebackq delims=" %%D in (`powershell -nologo -noprofile -command "[Envi
     set "docpath=%%D"
 )
 
-set "targetfolder=!docpath!\Batchware"
+set "targetfolder=!docpath!\Batchware\applications"
 if not exist "!targetfolder!" (
     mkdir "!targetfolder!"
 )
@@ -54,13 +54,13 @@ if "%choice%"=="1" (
 )
 
 if "%choice%"=="2" (
-    set "url=https://yourserver.com/pcinfo.bat"
-    set "output=!targetfolder!\pcinfo.bat"
+    set "url=https://raw.githubusercontent.com/aiko-s-Batchware/batchware-store/main/downloads/BatchAppstore.bat"
+    set "output=!targetfolder!\BatchAppstore.bat"
 )
 
 if "%choice%"=="3" (
-    set "url=https://yourserver.com/anotherapp.bat"
-    set "output=!targetfolder!\anotherapp.bat"
+    set "url=https://raw.githubusercontent.com/aiko-s-Batchware/batchware-store/main/downloads/BatchAppstore.bat"
+    set "output=!targetfolder!\BatchAppstore.bat"
 )
 
 if defined url (
