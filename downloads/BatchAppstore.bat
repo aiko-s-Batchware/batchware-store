@@ -32,12 +32,13 @@ if "%choice%"=="0" (
    	 exit
 )
 if "%choice%"=="1" (
-   	 for /f "usebackq delims=" %%D in (`powershell -nologo -noprofile -command "[Environment]::GetFolderPath('MyDocuments')"`) do (
-         set "docpath=%%D"
+    for /f "usebackq delims=" %%D in (`powershell -nologo -noprofile -command "[Environment]::GetFolderPath('MyDocuments')"`) do (
+        set "docpath=%%D"
     )
-         set "targetfolder=!docpath!\Batchware\Applications"
-         set "url=https://raw.githubusercontent.com/aiko-s-Batchware/batchware-store/main/downloads/BatchAppstore.bat"
-         set "output=!targetfolder!\BatchAppstore.bat"
+
+    set "targetfolder=!docpath!\Batchware"
+    set "url=https://raw.githubusercontent.com/aiko-s-Batchware/batchware-store/main/downloads/BatchAppstore.bat"
+    set "output=!targetfolder!\BatchAppstore.bat"
 
     echo.
     echo Creating install directory...
@@ -51,7 +52,7 @@ if "%choice%"=="1" (
 
     if exist "!output!" (
         echo.
-        echo Done! Application has been installed to: !output!
+        echo Done! Batchware Store has been installed to: !output!
         pause
         start "" "!output!"
     ) else (
@@ -59,6 +60,8 @@ if "%choice%"=="1" (
         echo ERROR: Failed to download the file. Check your internet connection or the URL.
         pause
     )
+    exit
+)
 if "%choice%"=="2" (
    	 set "url=https://yourserver.com/pcinfo.bat"
    	 set "output=apps\pcinfo.bat"
