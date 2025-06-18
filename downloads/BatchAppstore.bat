@@ -22,24 +22,56 @@ cls
 echo ==== Batch App Store ====
 echo.
 echo What would you like to do?
-echo 1. Install Unavailable
-echo 2. Exit
+echo 0. Exit
+echo 1. Install None
+echo 2. Install None
+echo 3. Install None
 set /p choice=Choose an option:
 
+if "%choice%"=="0" (
+   	 exit
+)
 if "%choice%"=="1" (
-    set "url=https://yourserver.com/notepad.bat"
-    set "output=apps\notepad.bat"
-    powershell -Command "Invoke-WebRequest '%url%' -OutFile '%output%'"
-    echo Done! File saved to apps\notepad.bat
-    pause
-    start "" "%output%"
-)
+   	 for /f "usebackq delims=" %%D in (`powershell -nologo -noprofile -command "[Environment]::GetFolderPath('MyDocuments')"`) do (
+         set "docpath=%%D"
+    )
+         set "targetfolder=!docpath!\Batchware\Applications"
+         set "url=https://raw.githubusercontent.com/aiko-s-Batchware/batchware-store/main/downloads/BatchAppstore.bat"
+         set "output=!targetfolder!\BatchAppstore.bat"
+
+    echo.
+    echo Creating install directory...
+    if not exist "!targetfolder!" (
+        mkdir "!targetfolder!"
+    )
+
+    echo.
+    echo Downloading Batchware Store...
+    powershell -nologo -noprofile -Command "Invoke-WebRequest -Uri '!url!' -OutFile '!output!'"
+
+    if exist "!output!" (
+        echo.
+        echo Done! Application has been installed to: !output!
+        pause
+        start "" "!output!"
+    ) else (
+        echo.
+        echo ERROR: Failed to download the file. Check your internet connection or the URL.
+        pause
+    )
 if "%choice%"=="2" (
-    set "url=https://yourserver.com/pcinfo.bat"
-    set "output=apps\pcinfo.bat"
-    powershell -Command "Invoke-WebRequest '%url%' -OutFile '%output%'"
-    echo Done! File saved to apps\pcinfo.bat
-    pause
-    start "" "%output%"
+   	 set "url=https://yourserver.com/pcinfo.bat"
+   	 set "output=apps\pcinfo.bat"
+   	 powershell -Command "Invoke-WebRequest '%url%' -OutFile '%output%'"
+   	 echo Done! File saved to apps\pcinfo.bat
+   	 pause
+   	 start "" "%output%"
 )
-if "%choice%"=="3" exit
+if "%choice%"=="3" (
+   	 set "url=https://yourserver.com/pcinfo.bat"
+   	 set "output=apps\pcinfo.bat"
+   	 powershell -Command "Invoke-WebRequest '%url%' -OutFile '%output%'"
+   	 echo Done! File saved to apps\pcinfo.bat
+   	 pause
+   	 start "" "%output%"
+)
